@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "110042320646",
+    "project_id": "seu-bom-vizinho",
+    "storage_bucket": "seu-bom-vizinho.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110042320646:android:4481940418ff7fefff5887",
+        "android_client_info": {
+          "package_name": "br.com.cliente.seubomvizinho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110042320646-74ht5f1vps24suqsp5kmaffsqo6hq5ms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.cliente.seubomvizinho",
+            "certificate_hash": "502c351c4d9bef0c67d8ffd157b2ab32f541e1c6"
+          }
+        },
+        {
+          "client_id": "110042320646-9khhdfuv6jljfs74o7n671qivs1o6t3j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.cliente.seubomvizinho",
+            "certificate_hash": "1d9afc587d8b4287ff54a2214e01b107b0e489f9"
+          }
+        },
+        {
+          "client_id": "110042320646-18nt7n0rr585dob129irn1q3gaqh6ooe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuYEsWvyVHk67woeVBXdHr_sVzIaw1wV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110042320646-18nt7n0rr585dob129irn1q3gaqh6ooe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
