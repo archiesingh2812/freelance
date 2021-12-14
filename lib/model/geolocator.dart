@@ -16,7 +16,7 @@ class MyLocation {
           dprint("MyLocation::getLastKnownPosition");
       return await _geolocator.getLastKnownPosition().timeout(Duration(seconds: 10));
     });
-    dprint("MyLocation::_currentPosition $_currentPosition");
+    // dprint("MyLocation::_currentPosition $_currentPosition");
     return _currentPosition;
   }
 

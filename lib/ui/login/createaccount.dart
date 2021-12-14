@@ -177,217 +177,266 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
 
       body: Directionality(
         textDirection: strings.direction,
-        child: Stack(
-        children: <Widget>[
+        child: SingleChildScrollView(
+          child: Stack(
+          children: <Widget>[
 
-          if (theme.appSkin == "basic")
-            IBackground4(width: windowWidth, colorsGradient: theme.colorsGradient),
-          if (theme.appSkin == "smarter")
+            if (theme.appSkin == "basic")
+              IBackground4(width: windowWidth, colorsGradient: theme.colorsGradient),
+            if (theme.appSkin == "smarter")
+              Container(
+                width: windowWidth,
+                height: windowHeight,
+                color: theme.colorPrimary,
+              ),
+
             Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image:AssetImage('assets/bg_login.png'),
+                      fit: BoxFit.cover
+                  )
+              ),
+              alignment: Alignment.bottomCenter,
+              // margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               width: windowWidth,
               height: windowHeight,
-              color: theme.colorPrimary,
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: windowWidth,
+                    height: 150,
+                    child: Image.asset("assets/login_logo.png",
+                        fit: BoxFit.fitWidth),
+                  ),
+                  Container(
+                      alignment: Alignment.bottomCenter,
+                      padding: EdgeInsets.fromLTRB(32, 32, 32, 80),
+                      height: windowHeight - 150,
+                      child: _body())
+                ],
+              ),
             ),
 
-          Container(
-            alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: windowWidth,
-              child: _body(),
-           ),
+            if (_wait)
+              skinWait(context, true),
 
-          if (_wait)
-            skinWait(context, true),
+            IEasyDialog2(setPosition: (double value){_show = value;}, getPosition: () {return _show;}, color: theme.colorGrey,
+              body: _dialogBody, backgroundColor: theme.colorBackground,),
 
-          IEasyDialog2(setPosition: (double value){_show = value;}, getPosition: () {return _show;}, color: theme.colorGrey,
-            body: _dialogBody, backgroundColor: theme.colorBackground,),
+            IAppBar(context: context, text: "", color: Colors.black),
 
-          IAppBar(context: context, text: "", color: Colors.white),
-
-        ],
+          ],
       ),
+        ),
     )));
   }
 
   _body(){
-    return ListView(
-      shrinkWrap: true,
-      controller: _scrollController,
-      children: <Widget>[
+    return Container(
+      margin: EdgeInsets.only(top: 0),
+      padding: EdgeInsets.only(left: 5, right: 5),
+      width: windowWidth,
+      height: windowHeight - 330,
+      alignment: FractionalOffset.topCenter,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              Colors.white,
+            ]),
+        border: Border.all(color: Colors.black, width: 5),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25)),
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        controller: _scrollController,
+        children: <Widget>[
 
-        Container(
-          width: windowWidth*0.4,
-          height: windowWidth*0.4,
-          child: Image.asset("assets/logo.png", fit: BoxFit.contain),
-        ),
-
-        SizedBox(height: windowHeight*0.05,),
-
-        Container(
-          width: windowWidth,
-          margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-          child: Text(strings.get(24),                        // "Create an Account!"
-            style: theme.text20boldWhite, textAlign: TextAlign.start,
+          Container(
+            width: windowWidth,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 0),
+            child: Text(strings.get(24),                        // "Create an Account!"
+              style: theme.text20boldWhite, textAlign: TextAlign.start,
+            ),
           ),
-        ),
 
-        SizedBox(height: 15,),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 0.5,
-          color: Colors.white.withAlpha(200),               // line
-        ),
-        Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child:
-            IInputField2a(
-              hint: strings.get(15),            // "Login"
-              icon: Icons.account_circle,
-              colorDefaultText: Colors.white,
-              controller: editControllerName,
-            )
-        ),
-        SizedBox(height: 5,),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 0.5,
-          color: Colors.white.withAlpha(200),               // line
-        ),
-        SizedBox(height: 5,),
-        Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child:
-            IInputField2a(
-              hint: strings.get(21),            // "E-mail address",
-              icon: Icons.alternate_email,
-              type: TextInputType.emailAddress,
-              colorDefaultText: Colors.white,
-              controller: editControllerEmail,
-            )
-        ),
-        SizedBox(height: 5,),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 0.5,
-          color: Colors.white.withAlpha(200),               // line
-        ),
-        SizedBox(height: 5,),
-        Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: IInputField2PasswordA(
-              hint: strings.get(16),            // "Password"
-              icon: Icons.vpn_key,
-              colorDefaultText: Colors.white,
-              controller: editControllerPassword1,
-            )),
-
-        SizedBox(height: 5,),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 0.5,
-          color: Colors.white.withAlpha(200),               // line
-        ),
-        SizedBox(height: 5,),
-        Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: IInputField2PasswordA(
-              hint: strings.get(25),            // "Confirm Password"
-              icon: Icons.vpn_key,
-              colorDefaultText: Colors.white,
-              controller: editControllerPassword2,
-            )),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 0.5,
-          color: Colors.white.withAlpha(200),               // line
-        ),
-        SizedBox(height: 20, width: 10,),
-
-
-        Container(
-          alignment: Alignment.bottomRight,
-
-          child: Row(
-            children: [
-
-              SizedBox(width: 10,),
-              if (appSettings.googleLogin == "true")
-                InkWell(
-                  onTap: () =>googleLogin.login(_login, _error), // handle your onTap here
-                  child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image:AssetImage('assets/google.png'),
-                              fit: BoxFit.contain
-                          )
-                      ),
-                      height: 60, width: 50),
-                ),
-
-              SizedBox(width: 10,),
-              if (appSettings.facebookLogin == "true")
-                InkWell(
-                  onTap: () =>facebookLogin.login(_login, _error), // handle your onTap here
-                  child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image:AssetImage('assets/facebook.png'),
-                              fit: BoxFit.contain
-                          )
-                      ),
-                      height: 60, width: 50),
-                ),
-
-              SizedBox(width: 10,),
-              InkWell(
-                onTap: () =>_pressCreateAccountButton(), // handle your onTap here
-                child:         Container(
-                  height: 50,
-                    width: 150,
-                    child: IButton3(
-                        color: theme.colorCompanion, text: strings.get(26), textStyle: theme.text14boldWhite,  // CREATE ACCOUNT
-                        pressButton: (){
-                          _pressCreateAccountButton();
-                        })),
-              ),
-            ],
+          SizedBox(height: 15,),
+          // Container(
+          //   margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          //   height: 0.5,
+          //   color: Colors.black.withAlpha(200),               // line
+          // ),
+          Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child:
+              IInputField2a(
+                hint: strings.get(15),            // "Login"
+                icon: Icons.account_circle,
+                iconColor: Colors.black,
+                colorDefaultText: Colors.black,
+                controller: editControllerName,
+                isBorderLined: true,
+              )
           ),
-        ),
+          SizedBox(height: 5,),
+
+          SizedBox(height: 5,),
+          Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child:
+              IInputField2a(
+                hint: strings.get(21),            // "E-mail address",
+                icon: Icons.alternate_email,
+                type: TextInputType.emailAddress,
+                iconColor: Colors.black,
+                colorDefaultText: Colors.black,
+                controller: editControllerEmail,               isBorderLined: true,
+
+              )
+          ),
+          SizedBox(height: 5,),
+          // Container(
+          //   margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          //   height: 0.5,
+          //   color: Colors.black.withAlpha(200),               // line
+          // ),
+          SizedBox(height: 5,),
+          Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: IInputField2PasswordA(
+                hint: strings.get(16),            // "Password"
+                icon: Icons.vpn_key,
+                iconColor: Colors.black,
+                colorDefaultText: Colors.black,
+                controller: editControllerPassword1,               isBorderLined: true,
+
+              )),
+
+          SizedBox(height: 5,),
+          // Container(
+          //   margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          //   height: 0.5,
+          //   color: Colors.black.withAlpha(200),               // line
+          // ),
+          SizedBox(height: 5,),
+          Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: IInputField2PasswordA(
+                hint: strings.get(25),            // "Confirm Password"
+                icon: Icons.vpn_key,
+                iconColor: Colors.black,
+                colorDefaultText: Colors.black,
+                controller: editControllerPassword2,               isBorderLined: true,
+
+              )),
+          // Container(
+          //   margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          //   height: 0.5,
+          //   color: Colors.black.withAlpha(200),               // line
+          // ),
+          SizedBox(height: 32),
+
+
+          Container(
+            alignment: Alignment.bottomRight,
+
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                SizedBox(width: 10,),
+                if (appSettings.googleLogin == "true")
+                  InkWell(
+                    onTap: () =>googleLogin.login(_login, _error), // handle your onTap here
+                    child: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:AssetImage('assets/google.png'),
+                                fit: BoxFit.contain
+                            )
+                        ),
+                        height: 40, width: 50),
+                  ),
+
+                SizedBox(width: 10,),
+                if (appSettings.facebookLogin == "true")
+                  InkWell(
+                    onTap: () =>facebookLogin.login(_login, _error), // handle your onTap here
+                    child: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:AssetImage('assets/facebook.png'),
+                                fit: BoxFit.contain
+                            )
+                        ),
+                        height: 40, width: 50),
+                  ),
+
+                // SizedBox(width: 10,),
+                Spacer(),
+                InkWell(
+                  onTap: () =>_pressCreateAccountButton(), // handle your onTap here
+                  child:         Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(16))),
+                    height: 50,
+                      width: 150,
+                      child: IButton3(
+                        radiusB: 12.0,
+                          color: Colors.black, text: strings.get(26), textStyle: theme.text14boldWhite,  // CREATE ACCOUNT
+                          pressButton: (){
+                            _pressCreateAccountButton();
+                          })),
+                ),
+              ],
+            ),
+          ),
 /*
-    if (appSettings.googleLogin == "true" || appSettings.facebookLogin == "true")
-        Container(child: Row(children: [
-          Expanded(child: Container(height: 0.3, color: theme.colorBackground,)),
-          Text(strings.get(271), style: theme.text14boldWhite),  // " or "
-          Expanded(child: Container(height: 0.3, color: theme.colorBackground,)),
-        ],)),
+      if (appSettings.googleLogin == "true" || appSettings.facebookLogin == "true")
+          Container(child: Row(children: [
+            Expanded(child: Container(height: 0.3, color: theme.colorBackground,)),
+            Text(strings.get(271), style: theme.text14boldWhite),  // " or "
+            Expanded(child: Container(height: 0.3, color: theme.colorBackground,)),
+          ],)),
 
-      if (appSettings.googleLogin == "true")
-        Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: IButton4(
-                color: Color(0xffd9534f), text: strings.get(269), textStyle: theme.text14boldWhite,  // Sign In with Google
-                icon: "assets/google.png",
-                pressButton: (){
-                  _waits(true);
-                  googleLogin.login(_login, _error);
-                })),
+        if (appSettings.googleLogin == "true")
+          Container(
+              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+              child: IButton4(
+                  color: Color(0xffd9534f), text: strings.get(269), textStyle: theme.text14boldWhite,  // Sign In with Google
+                  icon: "assets/google.png",
+                  pressButton: (){
+                    _waits(true);
+                    googleLogin.login(_login, _error);
+                  })),
 
-      if (appSettings.facebookLogin == "true")
-        Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: IButton4(
-                color: Color(0xff428bca), text: strings.get(270), textStyle: theme.text14boldWhite,  // Sign In with Facebook
-                icon: "assets/facebook.png",
-                pressButton: (){
-                  _waits(true);
-                  facebookLogin.login(_login, _error);
-                })),
+        if (appSettings.facebookLogin == "true")
+          Container(
+              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+              child: IButton4(
+                  color: Color(0xff428bca), text: strings.get(270), textStyle: theme.text14boldWhite,  // Sign In with Facebook
+                  icon: "assets/facebook.png",
+                  pressButton: (){
+                    _waits(true);
+                    facebookLogin.login(_login, _error);
+                  })),
 
-        if (appSettings.googleLogin == "true" || appSettings.facebookLogin == "true")
-          _buttoniOS(),
+          if (appSettings.googleLogin == "true" || appSettings.facebookLogin == "true")
+            _buttoniOS(),
 */
-        SizedBox(height: 30,),
-      ],
+          SizedBox(height: 30,),
+        ],
+      ),
     );
   }
 

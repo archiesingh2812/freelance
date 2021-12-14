@@ -3,7 +3,7 @@ Map<int, String> langPort = {
 82: "Você pode adicionar ao carrinho apenas produtos de um único mercado. Deseja redefinir o carrinho? E adicionar novo produto.",
 142: "Curtindo o mercado?",
 143: "Como você avaliaria este mercado?",
-200: "Principais mercados desta semana",
+200: "Principais adegas desta semana",
 247: "Retirada do mercado",
 259: "O Mercado:",
 267: "Mercado",
@@ -211,7 +211,7 @@ Map<int, String> langPort = {
   264: "O valor mínimo da compra deve ser",
   265: "Yandex.Kassa",
   266: "Instamojo",
-  268: "Seções",
+  268: "Categorias",
   269: "Faça login com o Google",
   270: "Faça login com o Facebook",
   271: "ou",
@@ -263,6 +263,8 @@ Map<int, String> langPort = {
   317: "Selecione sua cidade",
   318: "Selecionar cidade",
   319: "Todas as cidades",
+  320: "Você tem mais de 18 anos?",
+  321: "É proibido venda de bebidas alcoólicas para menores",
 
   //
   1010: "Restaurantes",

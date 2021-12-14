@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:fooddelivery/main.dart';
 import 'package:fooddelivery/widget/ibackground4.dart';
 import 'package:fooddelivery/widget/ibutton3.dart';
@@ -82,25 +83,26 @@ mustAuth(double windowWidth, BuildContext context){
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 100,),
             UnconstrainedBox(
                 child: Container(
                     width: windowWidth/3,
                     child: Image.asset("assets/auth.png",
-                      fit: BoxFit.contain, color: Colors.black.withAlpha(80),
+                      fit: BoxFit.contain, color: Colors.black,
                     )
                 )
             ),
             SizedBox(height: 30,),
             Container(
               margin: EdgeInsets.only(left: windowWidth*0.15, right: windowWidth*0.15),
-              child: Text(strings.get(125), textAlign: TextAlign.center,), // "You must sign-in to access to this section",
+              child: Text(strings.get(125), textAlign: TextAlign.center, style: TextStyle(color: Colors.black),), // "You must sign-in to access to this section",
             ),
             SizedBox(height: 40,),
             Container(
               margin: EdgeInsets.only(left: windowWidth*0.1, right: windowWidth*0.1),
               child: IButton3(pressButton: (){_pressLoginButton(context);}, text: strings.get(22), // LOGIN
-                color: theme.colorPrimary,
-                textStyle: theme.text16boldWhite.copyWith(color: Colors.black.withOpacity(0.9)),),
+                color: Colors.black,
+                textStyle: theme.text16boldWhite.copyWith(color: Colors.white.withOpacity(0.9)),),
             ),
             Container(
               margin: EdgeInsets.only(top:20),
@@ -122,7 +124,7 @@ mustAuth(double windowWidth, BuildContext context){
                   child:Text(strings.get(19),                    // ""Don't have an account? Create",",
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.center,
-                      style: theme.text14primary
+                      style: theme.text14primary.copyWith(color: Colors.black)
                   )),
             )
           ],

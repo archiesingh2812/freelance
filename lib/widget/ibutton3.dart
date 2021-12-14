@@ -10,11 +10,12 @@ class IButton3 extends StatelessWidget {
   final TextStyle textStyle;
   final bool onlyBorder;
   final bool enable;
-  IButton3({this.pressButton, this.text = "", this.color = Colors.grey, this.textStyle, this.height = 45, this.onlyBorder = false, this.enable = true});
+  final radiusB;
+  IButton3({this.pressButton, this.text = "", this.radiusB, this.color = Colors.black, this.textStyle, this.height = 45, this.onlyBorder = false, this.enable = true});
 
   @override
   Widget build(BuildContext context) {
-    double radius = appSettings.radius;
+    double radius = radiusB ?? appSettings.radius;
     if (theme.appSkin == "smarter")
       radius = 100;
     return Container(

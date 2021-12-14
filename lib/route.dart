@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/ui/login/checkage.dart';
 import 'package:fooddelivery/ui/login/createaccount.dart';
 import 'package:fooddelivery/ui/login/forgot.dart';
+import 'package:fooddelivery/ui/login/lessage.dart';
 import 'package:fooddelivery/ui/login/login.dart';
 import 'package:fooddelivery/ui/main/Delivery/delivery.dart';
 import 'package:fooddelivery/ui/main/basket.dart';
@@ -15,6 +17,8 @@ class AppFoodRoute{
     "/login" : LoginScreen(),
     "/forgot" : ForgotScreen(),
     "/createaccount" : CreateAccountScreen(),
+    "/checkAge" : CheckAge(),
+    "/lessAge" :LessAge(),
     "/main" : MainScreen(),
     "/dishesdetails" : DishesDetailsScreen(),
     "/restaurantdetails" : RestaurantDetailsScreen(),

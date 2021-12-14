@@ -8,7 +8,9 @@ class IInputField2PasswordA extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType type;
   final Color colorDefaultText;
-  IInputField2PasswordA({this.hint, this.icon, this.controller, this.type, this.colorDefaultText,
+  final Color iconColor;
+  final isBorderLined;
+  IInputField2PasswordA({this.hint, this.icon, this.isBorderLined = false, this.controller, this.iconColor, this.type, this.colorDefaultText,
     this.onChangeText});
 
   @override
@@ -25,7 +27,7 @@ class _IInputField2PasswordAState extends State<IInputField2PasswordA> {
     Color _colorDefaultText = Colors.black;
     if (widget.colorDefaultText != null)
       _colorDefaultText = widget.colorDefaultText;
-    var _sicon = Icon(widget.icon, color: theme.AATBlueColor,);
+    var _sicon = Icon(widget.icon,color:widget.iconColor != null ? widget.iconColor : theme.AATBlueColor,);
 
     var _icon = Icons.visibility_off;
     if (!_obscureText)
@@ -61,10 +63,13 @@ class _IInputField2PasswordAState extends State<IInputField2PasswordA> {
         decoration: new InputDecoration(
           prefixIcon: _sicon,
           suffixIcon: _sicon2,
-          border: InputBorder.none,
+          prefixIconColor: widget.iconColor,
+          suffixIconColor: widget.iconColor,
+          iconColor: widget.iconColor,
+          border: widget.isBorderLined ? UnderlineInputBorder(borderSide: BorderSide(color: Colors.black ), borderRadius: BorderRadius.all(Radius.circular(16))) : InputBorder.none,
           hintText: widget.hint,
           hintStyle: TextStyle(
-              color: _colorDefaultText,
+              color: _colorDefaultText, fontWeight: FontWeight.w600,
               fontSize: 16.0),
         ),
       ),

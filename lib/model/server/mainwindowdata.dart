@@ -883,13 +883,15 @@ class AppSettings {
       categoryCardCircle : (json['categoryCardCircle'] == null) ? "true" : json['categoryCardCircle'].toString(),
       // bottom bar
       bottomBarType : (json['bottomBarType'] == null) ? "type1" : json['bottomBarType'].toString(),
-      bottomBarColor : (json['bottomBarColor'] == null) ? theme.colorBackground : Color(int.parse(json['bottomBarColor'].toString(), radix: 16)),
-      titleBarColor :  (json['titleBarColor'] == null) ? theme.colorBackground : Color(int.parse(json['titleBarColor'].toString(), radix: 16)),
+      bottomBarColor : (json['bottomBarColor'] == null) ? theme.AATBlueColor : theme.AATBlueColor,
+        titleBarColor :  (json['titleBarColor'] == null) ? theme.AATBlueColor : theme.AATBlueColor,
+      // titleBarColor :  (json['titleBarColor'] == null) ? theme.AATBlueColor : Color(int.parse(json['titleBarColor'].toString(), radix: 16)),
       // map api key
       mapapikey : (json['mapapikey'] == null) ? "" : json['mapapikey'].toString(),
       // km or miles
       distanceUnit : (json['distanceUnit'] == null) ? "" : json['distanceUnit'].toString(),
       // app language
+      //   appLanguage: "1",
       appLanguage: (json['appLanguage'] == null) ? "1" : json['appLanguage'].toString(), // default english
       //
       banner1CardHeight : (json['banner1CardHeight'] == null) ? 40 : toInt(json['banner1CardHeight'].toString()),

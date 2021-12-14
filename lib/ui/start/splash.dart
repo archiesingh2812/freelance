@@ -15,16 +15,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   ////////////////////////////////////////////////////////////////
   //
   //
   //
-  _startNextScreen(){
+  _startNextScreen() {
     route.setDuration(1);
     //route.pushToStart(context, "/login");
     route.pushToStart(context, "/main");
   }
+
   //
   //
   ////////////////////////////////////////////////////////////////
@@ -35,21 +35,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     pref.init();
     Timer timer;
-    if(mounted) {
+    if (mounted) {
       super.initState();
     }
-    timer = Timer.periodic(Duration(milliseconds:500),(_){
+    timer = Timer.periodic(Duration(milliseconds: 500), (_) {
       setState(() {
-        percent+=10;
-        if(percent >= 100){
+        percent += 10;
+        if (percent >= 100) {
           timer.cancel();
           startTime();
           // percent=0;
         }
       });
     });
-
-
   }
 
   startTime() async {
@@ -67,55 +65,32 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   initScreen(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-          children: <Widget>[
-
-            Container(
-              width: windowHeight,
-                height: windowHeight,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image:AssetImage('assets/bg_carregando.png'),
-                        fit: BoxFit.cover
-                    )
-                ),
-              child:            Container(
-                height: 50,
-                child:            Container(
-                  margin: EdgeInsets.only(top:130),
-                height: 20, width: 100,
-                child:
-                new CircularPercentIndicator(
-                  radius: 70.0,
-                  animation: true,
-                  animationDuration: 100,
-                  percent:percent/100,
-                  center: new Text(percent.toString() + "%"),
-                  progressColor: theme.AATBlueColor,
-                )
-                /*CircularProgressIndicator(
-                        strokeWidth: 5,
-                        backgroundColor: theme.colorCompanion,
-                        valueColor: AlwaysStoppedAnimation<Color>(const Color(0XFF3412FA)),
-                      ),
-                  */
-              ),
-
-              ),
-
-                //color: theme.colorBackground,
-               // child: Image.asset('assets/logo.png', fit: BoxFit.cover,)
-            ),
-
-
-
-          ],
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          width: windowHeight,
+          height: windowHeight,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/bg_splash.png'),
+                  fit: BoxFit.cover)),
+        ),
+        Container(
+          width:windowWidth/2,
+          height:windowWidth/2,
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(24))),
+          alignment: Alignment.center,
+          child: new CircularPercentIndicator(
+            radius: 70.0,
+            animation: true,
+            animationDuration: 100,
+            percent: percent / 100,
+            center: new Text(percent.toString() + "%", style: TextStyle(fontWeight: FontWeight.w700),),
+            progressColor: theme.AATBlueColor,
+          ),
         )
-
+      ],
     );
   }
-
 }
-
-

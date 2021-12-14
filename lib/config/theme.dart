@@ -23,7 +23,9 @@ class AppThemeData{
   // colors
   //
   Color colorGrey = Color.fromARGB(255, 209, 210, 205);
-  Color colorPrimary = Color(0xff66b88c);
+  // Color colorPrimary = Color(0xff66b88c);
+  Color colorPrimary = Colors.black;
+
   Color colorCompanion = Color(0xff029600);
   var colorsVendorGradient = [Color(0xff98c7d8).withAlpha(100),  Color(0xff5794aa), Color(0xff306375), Color(0xff183843),];
 
@@ -42,7 +44,7 @@ class AppThemeData{
   Color sGreyColor = Color(0xffd3d3d6);
   Color sDarkBlueColor = Color(0xff000a32);
 
-  Color AATBlueColor = const Color(0XFF3412FA);
+  Color AATBlueColor = const Color(0XFFFAC917);
   double sMenuFontSize = 16;
 
 
@@ -97,7 +99,8 @@ class AppThemeData{
 
   init(){
     if (appTypePre == "restaurants"){
-      colorPrimary = Color(0xff668798); // restaurants
+      // colorPrimary = Color(0xff668798); // restaurants
+      colorPrimary = Colors.black;
       colorCompanion = Color(0xff009688); // restaurants
     }
     if (appTypePre == "market"){
@@ -106,7 +109,9 @@ class AppThemeData{
     if (appTypePre == "multivendor"){
       vendor = true;
       multiple = true;
-      colorPrimary = Color(0xff668798); // restaurants
+            colorPrimary = Colors.black;
+
+      // colorPrimary = Color(0xff668798); // restaurants
       colorCompanion = Color(0xff009688); // restaurants
     }
     if (appTypePre == "markets"){
@@ -316,7 +321,7 @@ class AppThemeData{
     );
 
     text20boldWhite = TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontWeight: FontWeight.w800,
       fontSize: 20,
     );
@@ -344,7 +349,8 @@ class AppThemeData{
   setAppSettings(){
 
     if (appSettings.mainColor != null){
-      colorPrimary = appSettings.mainColor;
+            colorPrimary = Colors.black;
+      // colorPrimary = appSettings.mainColor;
       pref.set(Pref.uiMainColor, appSettings.mainColor.value.toRadixString(16));
       Color _color2 = Color.fromARGB(80, colorPrimary.red, colorPrimary.green, colorPrimary.blue);
       colorsGradient = [_color2, colorPrimary];
@@ -374,7 +380,10 @@ class AppThemeData{
     var lid = int.parse(appSettings.appLanguage);
     var user = pref.get(Pref.userSelectLanguage);
     if (user != "true")
-      strings.setLang(lid);  // set default language
+      print('setting languae');
+    print(lid);
+      //changed language here
+      strings.setLang(1);  // set default language
 
     appSkin = appSettings.skin;
   }

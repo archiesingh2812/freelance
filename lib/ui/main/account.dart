@@ -143,7 +143,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
-          color: theme.colorPrimary,
+          color: theme.colorDefaultText,
           text: strings.get(146),                           // Edit Profile
           textStyle: theme.text14boldWhite,
           pressButton: _pressEditProfileButton
@@ -155,7 +155,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
-          color: theme.colorPrimary,
+          color: theme.colorDefaultText,
           text: strings.get(145),                           // Change password
           textStyle: theme.text14boldWhite,
           pressButton: _onChangePassword
@@ -167,7 +167,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
-          color: theme.colorPrimary,
+          color: theme.colorDefaultText,
           text: strings.get(132),                           // Sign Out
           textStyle: theme.text14boldWhite,
           pressButton: _pressLogOutButton

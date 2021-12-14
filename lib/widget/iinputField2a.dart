@@ -10,9 +10,12 @@ class IInputField2a extends StatefulWidget {
   final Function(String) onChangeText;
   final TextEditingController controller;
   final TextInputType type;
+  final Color iconColor;
   final Color colorDefaultText;
-  IInputField2a({this.hint, this.icon, this.controller, this.type, this.colorDefaultText,
-    this.iconRight, this.onPressRightIcon, this.onChangeText});
+  final isBorderLined;
+
+  IInputField2a({this.hint, this.icon,this.isBorderLined = false, this.controller, this.type, this.colorDefaultText,
+    this.iconRight, this.onPressRightIcon, this.onChangeText, this.iconColor});
 
   @override
   _IInputField2aState createState() => _IInputField2aState();
@@ -26,7 +29,7 @@ class _IInputField2aState extends State<IInputField2a> {
     Color _colorDefaultText = Colors.black;
     if (widget.colorDefaultText != null)
       _colorDefaultText = widget.colorDefaultText;
-    var _sicon = Icon(widget.icon, color: theme.AATBlueColor,);
+    var _sicon = Icon(widget.icon, color:widget.iconColor != null ? widget.iconColor : theme.AATBlueColor,);
 
     var _sicon2;
     if (widget.iconRight != null)
@@ -35,7 +38,7 @@ class _IInputField2aState extends State<IInputField2a> {
         if (widget.onPressRightIcon != null)
           widget.onPressRightIcon();
       }, // needed
-      child: Icon(widget.iconRight, color: theme.AATBlueColor,));
+      child: Icon(widget.iconRight, color:widget.iconColor != null ? widget.iconColor : theme.AATBlueColor,));
 
     return Container(
       child: new TextFormField(
@@ -56,10 +59,13 @@ class _IInputField2aState extends State<IInputField2a> {
         decoration: new InputDecoration(
           prefixIcon: _sicon,
           suffixIcon: _sicon2,
-          border: InputBorder.none,
+          prefixIconColor: widget.iconColor,
+          suffixIconColor: widget.iconColor,
+          iconColor: widget.iconColor,
+          border: widget.isBorderLined ? UnderlineInputBorder(borderSide: BorderSide(color: Colors.black ), borderRadius: BorderRadius.all(Radius.circular(16))) : InputBorder.none,
           hintText: widget.hint,
           hintStyle: TextStyle(
-              color: _colorDefaultText,
+              color: _colorDefaultText, fontWeight: FontWeight.w600,
               fontSize: 16.0),
         ),
       ),
