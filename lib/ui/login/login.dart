@@ -100,18 +100,18 @@ class _LoginScreenState extends State<LoginScreen>
     if (error == "login_canceled") return;
     if (error == "1") {
       if (_socialEnter) {
-        if (appSettings.otp == "true")
-          return Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OTPScreen(
-                  name: _socialName,
-                  email: "$_socialId@$_socialType.com",
-                  type: _socialType,
-                  password: _socialId,
-                  photo: _socialPhoto),
-            ),
-          );
+        // if (appSettings.otp == "true")
+        //   return Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => OTPScreen(
+        //           name: _socialName,
+        //           email: "$_socialId@$_socialType.com",
+        //           type: _socialType,
+        //           password: _socialId,
+        //           photo: _socialPhoto),
+        //     ),
+        //   );
         return register("$_socialId@$_socialType.com", _socialId, _socialName,
             _socialType, _socialPhoto, _okUserEnter2, _error);
       }
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen>
     _waits(false);
     account.okUserEnter(name, password, avatar, email, token, "", 0, typeReg);
     // changing main routes herwe
-        route.push(context, "/checkAge");
+    route.push(context, "/checkAge");
 
     // route.pushToStart(context, "/main");
   }
@@ -135,8 +135,8 @@ class _LoginScreenState extends State<LoginScreen>
     _waits(false);
     account.okUserEnter(
         name, password, avatar, email, token, _phone, i, typeReg);
-            // changing main routes herwe
-        route.push(context, "/checkAge");
+    // changing main routes herwe
+    route.push(context, "/checkAge");
 
     // route.pop(context);
   }
@@ -222,10 +222,8 @@ class _LoginScreenState extends State<LoginScreen>
             Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image:AssetImage('assets/bg_login.png'),
-                      fit: BoxFit.cover
-                  )
-              ),
+                      image: AssetImage('assets/bg_login.png'),
+                      fit: BoxFit.cover)),
               alignment: Alignment.bottomCenter,
               // margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               width: windowWidth,
@@ -243,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                   Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.fromLTRB(32, 32, 32, 32),
+                      padding: EdgeInsets.fromLTRB(32, 16, 32, 64),
                       height: windowHeight - 150,
                       child: _body())
                 ],
@@ -328,7 +326,10 @@ class _LoginScreenState extends State<LoginScreen>
 
         Container(
             margin: EdgeInsets.only(top: 0),
-            padding: EdgeInsets.only(left: 5, right: 5,),
+            padding: EdgeInsets.only(
+              left: 5,
+              right: 5,
+            ),
             width: windowWidth,
             height: 250,
             alignment: FractionalOffset.bottomCenter,
@@ -348,9 +349,8 @@ class _LoginScreenState extends State<LoginScreen>
                   bottomLeft: Radius.circular(25)),
             ),
             child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                     children: <Widget>[
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Container(
                   margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: IInputField2a(
@@ -421,7 +421,7 @@ class _LoginScreenState extends State<LoginScreen>
                           child: Container(
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage('assets/facebook.png' ),
+                                      image: AssetImage('assets/facebook.png'),
                                       fit: BoxFit.contain)),
                               height: 60,
                               width: windowWidth * 0.10),
@@ -434,12 +434,21 @@ class _LoginScreenState extends State<LoginScreen>
                         onTap: () => _pressLoginButton(),
                         // handle your onTap here
                         child: Container(
-                          alignment: Alignment.center,
+                            alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
-                                color: Colors.black,),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              color: Colors.black,
+                            ),
                             height: 45,
-                            child: Text('ENTRAR', style: TextStyle(fontSize: 12, color: theme.AATBlueColor, fontWeight: FontWeight.w800, ), ),
+                            child: Text(
+                              'ENTRAR',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: theme.AATBlueColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
                             width: windowWidth * 0.32),
                       ),
                     ],
@@ -455,11 +464,12 @@ class _LoginScreenState extends State<LoginScreen>
             }, // needed
             child: Container(
               padding: EdgeInsets.only(left: 20, right: 20, bottom: 0, top: 0),
-              child:
-                  Text(strings.get(19), // ""Don't have an account? Create",",
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black)),
+              child: Text(
+                  strings.get(19), // ""Don't have an account? Create",",
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600, color: Colors.black)),
             )),
         // InkWell(
         //     onTap: () {

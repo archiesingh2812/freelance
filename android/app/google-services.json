@@ -30,11 +30,64 @@
           }
         },
         {
+          "client_id": "110042320646-eegni9p918oj855h8tt34sm7pv03cvm2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.cliente.seubomvizinho",
+            "certificate_hash": "726796d403592371eb908c99b8ddcf4178a7f073"
+          }
+        },
+        {
           "client_id": "110042320646-mhn50pm0132l8ug817r3dfcbjo9pk9fu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.cliente.seubomvizinho",
             "certificate_hash": "d8317abc66dfe9f55a9ab8d98ef8ef2ca4c21aa2"
+          }
+        },
+        {
+          "client_id": "110042320646-18nt7n0rr585dob129irn1q3gaqh6ooe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuYEsWvyVHk67woeVBXdHr_sVzIaw1wV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110042320646-18nt7n0rr585dob129irn1q3gaqh6ooe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110042320646:android:bc6974a141a1e640ff5887",
+        "android_client_info": {
+          "package_name": "br.com.entregador.seubomvizinho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110042320646-6qj5er3p3hjiu3btvm6tjs0dcak62fb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.entregador.seubomvizinho",
+            "certificate_hash": "d8317abc66dfe9f55a9ab8d98ef8ef2ca4c21aa2"
+          }
+        },
+        {
+          "client_id": "110042320646-cnpd21dsabne1kcnkcc15u5do3o3u79h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.entregador.seubomvizinho",
+            "certificate_hash": "726796d403592371eb908c99b8ddcf4178a7f073"
           }
         },
         {

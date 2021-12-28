@@ -26,7 +26,6 @@ class _LessAgeState extends State<LessAge> {
         padding: EdgeInsets.fromLTRB(24, 64, 24, 100),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          
           children: [
             Image.asset(
               'assets/lessAge.png',
@@ -34,7 +33,7 @@ class _LessAgeState extends State<LessAge> {
             ),
             // Spacer(),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             Flexible(
                 child: Text(

@@ -5,17 +5,18 @@ import 'dart:convert';
 
 import '../utils.dart';
 
-login(String email, String password,
-    Function(String name, String password, String avatar, String email, String token, String phone, int unreadNotify, String) callback,
+login(
+    String email,
+    String password,
+    Function(String name, String password, String avatar, String email,
+            String token, String phone, int unreadNotify, String)
+        callback,
     Function(String) callbackError) async {
-
   try {
-    var body = json.encoder.convert(
-        {
-          'email': '$email',
-          'password': '$password',
-        }
-    );
+    var body = json.encoder.convert({
+      'email': '$email',
+      'password': '$password',
+    });
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
@@ -24,9 +25,10 @@ login(String email, String password,
       // 'Host' : "madir.com.ng"
     };
 
-
-    var url = "${serverPath}login";
-    var response = await http.post(Uri.parse(url), headers: requestHeaders, body: body).timeout(const Duration(seconds: 30));
+    var url = "${loginserverPath}login";
+    var response = await http
+        .post(Uri.parse(url), headers: requestHeaders, body: body)
+        .timeout(const Duration(seconds: 30));
 
     dprint("login: $url, $body");
     dprint('Response status: ${response.statusCode}');
@@ -38,16 +40,21 @@ login(String email, String password,
       if (ret.error == "0") {
         if (ret.data != null) {
           var path = "";
-          if (ret.data.avatar != null && ret.data.avatar.toLowerCase() != "null")
+          if (ret.data.avatar != null &&
+              ret.data.avatar.toLowerCase() != "null")
             path = "$serverImages${ret.data.avatar}";
-          callback(ret.data.name, password, path, email, ret.accessToken, ret.data.phone, ret.notify, ret.data.typeReg);
-        }else
+          var checkImg = await http.get(Uri.parse("$path"));
+          if (checkImg.statusCode != 200) {
+            path = "$serverImages2${ret.data.avatar}";
+          }
+          callback(ret.data.name, password, path, email, ret.accessToken,
+              ret.data.phone, ret.notify, ret.data.typeReg);
+        } else
           callbackError("error:ret.data=null");
-      }else
+      } else
         callbackError(ret.error);
-    }else
+    } else
       callbackError("statusCode=${response.statusCode}");
-
   } catch (ex) {
     callbackError(ex.toString());
   }
@@ -59,10 +66,9 @@ class Response {
   String accessToken;
   int notify;
   Response({this.error, this.data, this.accessToken, this.notify});
-  factory Response.fromJson(Map<String, dynamic> json){
+  factory Response.fromJson(Map<String, dynamic> json) {
     var a;
-    if (json['user'] != null)
-      a = UserData.fromJson(json['user']);
+    if (json['user'] != null) a = UserData.fromJson(json['user']);
     return Response(
       error: json['error'].toString(),
       accessToken: json['access_token'].toString(),
@@ -77,8 +83,8 @@ class UserData {
   String phone;
   String avatar;
   String typeReg;
-  UserData({ this.name, this.avatar, this.phone, this.typeReg});
-  factory UserData.fromJson(Map<String, dynamic> json){
+  UserData({this.name, this.avatar, this.phone, this.typeReg});
+  factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
       name: json['name'].toString(),
       avatar: json['avatar'].toString(),
@@ -87,4 +93,3 @@ class UserData {
     );
   }
 }
-
