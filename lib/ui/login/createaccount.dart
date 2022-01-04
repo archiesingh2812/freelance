@@ -51,19 +51,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
       return openDialog(strings.get(177)); // "Enter your password"
     if (editControllerPassword1.text != editControllerPassword2.text)
       return openDialog(strings.get(134)); // "Passwords are different.",
-    // if (appSettings.otp == "true")
-    //   return Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => OTPScreen(
-    //         name: editControllerName.text,
-    //         email: editControllerEmail.text,
-    //         type: "email",
-    //         password: editControllerPassword1.text,
-    //         photo: ""
-    //       ),
-    //     ),
-    //   );
+    if (appSettings.otp == "true")
+      return Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OTPScreen(
+              name: editControllerName.text,
+              email: editControllerEmail.text,
+              type: "email",
+              password: editControllerPassword1.text,
+              photo: ""),
+        ),
+      );
 
     _waits(true);
     register(editControllerEmail.text, editControllerPassword1.text,
@@ -205,7 +204,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                         // mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         // mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             width: windowWidth,
@@ -215,7 +214,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                           ),
                           Container(
                               alignment: Alignment.bottomCenter,
-                              padding: EdgeInsets.fromLTRB(32, 32, 32, 80),
+                              padding: EdgeInsets.fromLTRB(32, 16, 32, 32),
                               height: windowHeight - 150,
                               child: _body())
                         ],
@@ -245,7 +244,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
       margin: EdgeInsets.only(top: 0),
       padding: EdgeInsets.only(left: 5, right: 5),
       width: windowWidth,
-      height: windowHeight - 330,
+      height: windowHeight - 200,
       alignment: FractionalOffset.topCenter,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -460,18 +459,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
 
   _login(String type, String id, String name, String photo) {
     dprint("Reg: type=$type, id=$id, name=$name, photo=$photo");
-    // if (appSettings.otp == "true")
-    //   return Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => OTPScreen(
-    //           name: name,
-    //           email: "$id@$type.com",
-    //           type: type,
-    //           password: id,
-    //           photo: photo),
-    //     ),
-    //   );
+    if (appSettings.otp == "true")
+      return Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OTPScreen(
+              name: name,
+              email: "$id@$type.com",
+              type: type,
+              password: id,
+              photo: photo),
+        ),
+      );
 
     register("$id@$type.com", id, name, type, photo, _okUserEnter, _error);
   }

@@ -91,6 +91,14 @@
           }
         },
         {
+          "client_id": "110042320646-s8ojsgf5lpvakau6ssbbeg6s2ua8fi8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.entregador.seubomvizinho",
+            "certificate_hash": "502c351c4d9bef0c67d8ffd157b2ab32f541e1c6"
+          }
+        },
+        {
           "client_id": "110042320646-18nt7n0rr585dob129irn1q3gaqh6ooe.apps.googleusercontent.com",
           "client_type": 3
         }

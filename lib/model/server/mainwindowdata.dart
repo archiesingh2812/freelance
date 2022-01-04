@@ -36,6 +36,8 @@ class MainWindowDataAPI {
       } else
         callbackError("statusCode=${response.statusCode}");
     } on Exception catch (ex) {
+      print('hi we have exception here');
+      print('hi exception ${ex.toString()}');
       callbackError(ex.toString());
     }
   }
@@ -592,9 +594,9 @@ class RProductsData {
 }
 
 class VariantsData {
-  String id; 
+  String id;
   String name;
-  String image; 
+  String image;
   double price;
   double dprice;
   //
@@ -1068,8 +1070,10 @@ class AppSettings {
           ? "true"
           : json['categoryCardCircle'].toString(),
       // bottom bar
-      // bottomBarType : (json['bottomBarType'] == null) ? "type1" : json['bottomBarType'].toString(),
-      bottomBarType: "type1",
+      bottomBarType: (json['bottomBarType'] == null)
+          ? "type1"
+          : json['bottomBarType'].toString(),
+      // bottomBarType: "type1",
       bottomBarColor: (json['bottomBarColor'] == null)
           ? theme.AATBlueColor
           : theme.AATBlueColor,
@@ -1138,7 +1142,7 @@ class AppSettings {
           (json['deliveringDate'] == null) ? "true" : json['deliveringDate'],
       delivering: (json['delivering'] == null) ? "true" : json['delivering'],
       //
-      skin: (json['skin'] == null) ? "basic" : "basic",
+      skin: (json['skin'] == null) ? "basic" : json['skin'],
       // share
       shareAppGooglePlay: (json['shareAppGooglePlay'] == null)
           ? ""

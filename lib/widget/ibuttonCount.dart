@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fooddelivery/widget/iinkwell.dart';
 
 class IButtonCount extends StatefulWidget {
-  @required final Function(int) pressButton;
+  @required
+  final Function(int) pressButton;
   final Color color;
   final TextStyle textStyle;
   final int count;
@@ -12,44 +13,41 @@ class IButtonCount extends StatefulWidget {
 }
 
 class _IButtonCountState extends State<IButtonCount> {
-
   int _count = 0;
   Color _colorMinus;
   Color _color = Colors.grey;
-  var _textStyle = TextStyle(fontSize: 16);
+  var _textStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w800,
+    fontSize: 20,
+  );
 
-  _onMinusClick(){
+  _onMinusClick() {
     print("User click minus button");
     setState(() {
-      if (_count > 1)
-        _count--;
-      if (_count == 1)
-        _colorMinus = Colors.grey;
+      if (_count > 1) _count--;
+      if (_count == 1) _colorMinus = Colors.grey;
     });
-    if (widget.pressButton != null)
-      widget.pressButton(_count);
+    if (widget.pressButton != null) widget.pressButton(_count);
   }
 
-  _onPlusClick(){
+  _onPlusClick() {
     print("User click plus button");
     setState(() {
       _count++;
       _colorMinus = _color;
     });
-    if (widget.pressButton != null)
-      widget.pressButton(_count);
+    if (widget.pressButton != null) widget.pressButton(_count);
   }
 
   @override
   void initState() {
-    if (widget.count != null)
-      _count = widget.count;
+    if (widget.count != null) _count = widget.count;
     if (widget.color != null) {
       _color = widget.color;
       _colorMinus = _color;
     }
-    if (widget.textStyle != null)
-      _textStyle = widget.textStyle;
+    if (widget.textStyle != null) _textStyle = widget.textStyle;
     super.initState();
   }
 
@@ -57,15 +55,35 @@ class _IButtonCountState extends State<IButtonCount> {
   Widget build(BuildContext context) {
     return Container(
         child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            IInkWell(child: Icon(Icons.remove_circle_outline, color: _colorMinus, size: 25,), onPress: _onMinusClick,),
-            SizedBox(width: 10,),
-            Text(_count.toString(), style: _textStyle,),
-            SizedBox(width: 10,),
-            IInkWell(child: Icon(Icons.add_circle_outline, color: _color, size: 25,), onPress: _onPlusClick,),
-          ],
-        )
-        );
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        IInkWell(
+          child: Icon(
+            Icons.remove_circle_outline,
+            color: _colorMinus,
+            size: 25,
+          ),
+          onPress: _onMinusClick,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          _count.toString(),
+          style: _textStyle,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        IInkWell(
+          child: Icon(
+            Icons.add_circle_outline,
+            color: _color,
+            size: 25,
+          ),
+          onPress: _onPlusClick,
+        ),
+      ],
+    ));
   }
 }

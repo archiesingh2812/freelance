@@ -66,7 +66,7 @@ class _ImagesBigScreenState extends State<ImagesBigScreen> with SingleTickerProv
                 margin: EdgeInsets.only(bottom: 30),
               ),
 
-            appbar1(Colors.transparent, Colors.white, "", context, () {Navigator.pop(context);})
+            appbar1(Colors.transparent, Colors.black, "", context, () {Navigator.pop(context);})
 
           ],
         )

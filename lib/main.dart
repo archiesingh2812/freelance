@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -42,38 +43,37 @@ const _kTestingCrashlytics = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  HttpOverrides.global = MyHttpOverrides();
   runZonedGuarded(() {
     main2();
   }, FirebaseCrashlytics.instance.recordError);
 }
 
-main2(){
+main2() {
   pref.init().then((instance) {
     appSettings.bottomBarType = pref.get(Pref.bottomBarType);
 
     var dark = pref.get(Pref.uiDarkMode);
-    if (dark == "true")
-      theme.darkMode = true;
+    if (dark == "true") theme.darkMode = true;
     theme.init();
     var colorMain = pref.get(Pref.uiMainColor);
     if (colorMain.isNotEmpty) {
       theme.colorPrimary = Color(int.parse(colorMain, radix: 16));
-      Color _color2 = Color.fromARGB(80, theme.colorPrimary.red, theme.colorPrimary.green, theme.colorPrimary.blue);
+      Color _color2 = Color.fromARGB(80, theme.colorPrimary.red,
+          theme.colorPrimary.green, theme.colorPrimary.blue);
       theme.colorsGradient = [_color2, theme.colorPrimary];
     }
 
     var id = pref.get(Pref.language);
     var lid = Lang.english;
-    if (id.isNotEmpty)
-      lid = int.parse(id);
-    strings.setLang(lid);  // set default language - English
+    if (id.isNotEmpty) lid = int.parse(id);
+    strings.setLang(lid); // set default language - English
     runApp(AppFoodDelivery());
   });
 }
 
 // ignore: must_be_immutable
-class AppFoodDelivery  extends StatelessWidget {
-
+class AppFoodDelivery extends StatelessWidget {
   /*
       https://firebase.flutter.dev/docs/crashlytics/usage/
       https://pub.dev/packages/firebase_crashlytics
@@ -87,7 +87,8 @@ class AppFoodDelivery  extends StatelessWidget {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+      await FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(!kDebugMode);
     }
 
     // Pass all uncaught errors to Crashlytics.
@@ -97,13 +98,11 @@ class AppFoodDelivery  extends StatelessWidget {
       // Forward to original handler.
       originalOnError(errorDetails);
     };
-
   }
 
   @override
   Widget build(BuildContext context) {
-
-   _initializeFlutterFire();
+    _initializeFlutterFire();
     // FirebaseCrashlytics.instance.log("Higgs-Boson detected! Bailing out");
 
     var _theme = ThemeData(
@@ -111,18 +110,17 @@ class AppFoodDelivery  extends StatelessWidget {
       primarySwatch: theme.primarySwatch,
       accentColor: theme.colorPrimary,
       textTheme: TextTheme(
-          button: TextStyle(color: Colors.black),
+        button: TextStyle(color: Colors.black),
       ),
     );
 
-    if (theme.darkMode){
+    if (theme.darkMode) {
       _theme = ThemeData(
         fontFamily: 'Raleway',
         brightness: Brightness.dark,
-        unselectedWidgetColor:Colors.white,
+        unselectedWidgetColor: Colors.white,
         primarySwatch: theme.primarySwatch,
-        textTheme: TextTheme(
-        ).apply(
+        textTheme: TextTheme().apply(
           bodyColor: Colors.white,
         ),
       );
@@ -132,7 +130,7 @@ class AppFoodDelivery  extends StatelessWidget {
     dprint(theme.appTypePre);
 
     return MaterialApp(
-      title: strings.get(10),  // "Food Delivery Flutter App UI Kit",
+      title: strings.get(10), // "Food Delivery Flutter App UI Kit",
       debugShowCheckedModeBanner: false,
       theme: _theme,
       initialRoute: '/splash',
@@ -144,5 +142,11 @@ class AppFoodDelivery  extends StatelessWidget {
   }
 }
 
-
-
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}

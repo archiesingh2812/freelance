@@ -100,18 +100,18 @@ class _LoginScreenState extends State<LoginScreen>
     if (error == "login_canceled") return;
     if (error == "1") {
       if (_socialEnter) {
-        // if (appSettings.otp == "true")
-        //   return Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => OTPScreen(
-        //           name: _socialName,
-        //           email: "$_socialId@$_socialType.com",
-        //           type: _socialType,
-        //           password: _socialId,
-        //           photo: _socialPhoto),
-        //     ),
-        //   );
+        if (appSettings.otp == "true")
+          return Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OTPScreen(
+                  name: _socialName,
+                  email: "$_socialId@$_socialType.com",
+                  type: _socialType,
+                  password: _socialId,
+                  photo: _socialPhoto),
+            ),
+          );
         return register("$_socialId@$_socialType.com", _socialId, _socialName,
             _socialType, _socialPhoto, _okUserEnter2, _error);
       }

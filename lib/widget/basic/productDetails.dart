@@ -3,7 +3,8 @@ import 'package:fooddelivery/main.dart';
 import 'package:fooddelivery/widget/ibutton3.dart';
 import 'package:fooddelivery/widget/ibuttonCount.dart';
 
-bSkinProductDetailsAddToCartButtons(double windowWidth, String price, Function() _tapAddToCart, Function(int count) _onPress) {
+bSkinProductDetailsAddToCartButtons(double windowWidth, String price,
+    Function() _tapAddToCart, Function(int count) _onPress) {
   return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -13,20 +14,36 @@ bSkinProductDetailsAddToCartButtons(double windowWidth, String price, Function()
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Flexible(child: IButton3(text: strings.get(90),                           // Add to cart
+              Flexible(
+                  child: IButton3(
+                text: strings.get(90), // Add to cart
                 color: theme.colorPrimary, pressButton: _tapAddToCart,
                 textStyle: theme.text14boldWhite,
               )),
               Flexible(
-                  child: FittedBox(child: Text(price,
-                    style: theme.text20boldWhite,),
-                  )),
+                  child: FittedBox(
+                child: Text(
+                  price,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                  ),
+                ),
+              )),
               Container(
                 padding: EdgeInsets.only(left: 10, right: 10),
-                child: IButtonCount(textStyle: theme.text20boldWhite, color: Colors.white, count: 1, pressButton: _onPress,),
+                child: IButtonCount(
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  ),
+                  color: Colors.white,
+                  count: 1,
+                  pressButton: _onPress,
+                ),
               )
             ],
-          )
-      )
-  );
+          )));
 }

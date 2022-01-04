@@ -6,7 +6,6 @@ import 'package:fooddelivery/widget/ibutton3.dart';
 import 'package:fooddelivery/widget/ibutton5.dart';
 import 'package:fooddelivery/widget/ilist4.dart';
 import 'package:fooddelivery/widget/skinRoute.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class AccountScreen extends StatefulWidget {
   final Function(String) onDialogOpen;
@@ -16,25 +15,24 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-
   ///////////////////////////////////////////////////////////////////////////////
   //
 
-  _makePhoto(){
+  _makePhoto() {
     print("Make photo");
     widget.onDialogOpen("makePhoto");
   }
 
-  _onChangePassword(){
+  _onChangePassword() {
     widget.onDialogOpen("changePassword");
   }
 
-  _pressEditProfileButton(){
+  _pressEditProfileButton() {
     print("User pressed Edit profile");
     widget.onDialogOpen("EditProfile");
   }
 
-  _pressLogOutButton(){
+  _pressLogOutButton() {
     print("User pressed Log Out");
     account.logOut();
   }
@@ -49,9 +47,8 @@ class _AccountScreenState extends State<AccountScreen> {
     super.initState();
   }
 
-  callback(bool reg){
-    setState(() {
-    });
+  callback(bool reg) {
+    setState(() {});
   }
 
   @override
@@ -67,23 +64,20 @@ class _AccountScreenState extends State<AccountScreen> {
     return Directionality(
         textDirection: strings.direction,
         child: Stack(
-        children: <Widget>[
-
-          if (account.isAuth())(
-          Container(
-            child: Container(
-                child: ListView(
+          children: <Widget>[
+            if (account.isAuth())
+              (Container(
+                child: Container(
+                    child: ListView(
                   padding: EdgeInsets.only(top: 0),
                   shrinkWrap: true,
                   children: _getList(),
-                )
-            ),
-          ))else
+                )),
+              ))
+            else
               mustAuth(windowWidth, context),
-
-        ],
-
-    ));
+          ],
+        ));
   }
 
   _getList() {
@@ -91,20 +85,21 @@ class _AccountScreenState extends State<AccountScreen> {
 
     skinAccountHeader1(list, windowWidth, context);
 
-    list.add(
-        Stack(
-          children: [
-            skinAccountHeader2(windowWidth, windowHeight),
-            IAvatarWithPhotoFileCaching(
-              avatar: account.userAvatar,
-              color: theme.colorPrimary,
-              colorBorder: theme.colorGrey,
-              callback: _makePhoto,
-            ),
-            //_logoutWidget(),
-          ],
-        ));
-    list.add(SizedBox(height: 10,));
+    list.add(Stack(
+      children: [
+        skinAccountHeader2(windowWidth, windowHeight),
+        IAvatarWithPhotoFileCaching(
+          avatar: account.userAvatar,
+          color: theme.colorPrimary,
+          colorBorder: theme.colorGrey,
+          callback: _makePhoto,
+        ),
+        //_logoutWidget(),
+      ],
+    ));
+    list.add(SizedBox(
+      height: 10,
+    ));
 
     list.add(Container(
       margin: EdgeInsets.only(left: 30, right: 20),
@@ -112,123 +107,143 @@ class _AccountScreenState extends State<AccountScreen> {
       child: _userInfo(),
     ));
 
-    list.add(SizedBox(height: 30,));
-
-    list.add(Container(
-        margin: EdgeInsets.only(left: 30, right: 20),
-        child: _editProfile()
+    list.add(SizedBox(
+      height: 30,
     ));
 
-    list.add(SizedBox(height: 15,));
+    list.add(Container(
+        margin: EdgeInsets.only(left: 30, right: 20), child: _editProfile()));
+
+    list.add(SizedBox(
+      height: 15,
+    ));
 
     if (account.typeReg == "email")
       list.add(Container(
           margin: EdgeInsets.only(left: 30, right: 20),
-          child: _changePassword()
-      ));
+          child: _changePassword()));
 
-    list.add(SizedBox(height: 15,));
-
-    list.add(Container(
-        margin: EdgeInsets.only(left: 30, right: 20),
-        child: _logout()
+    list.add(SizedBox(
+      height: 15,
     ));
 
-    list.add(SizedBox(height: 100,));
+    list.add(Container(
+        margin: EdgeInsets.only(left: 30, right: 20), child: _logout()));
+
+    list.add(SizedBox(
+      height: 100,
+    ));
 
     return list;
   }
 
-  _editProfile(){
+  _editProfile() {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
           color: theme.colorDefaultText,
-          text: strings.get(146),                           // Edit Profile
+          text: strings.get(146), // Edit Profile
           textStyle: theme.text14boldWhite,
-          pressButton: _pressEditProfileButton
-      ),
+          pressButton: _pressEditProfileButton),
     );
   }
 
-  _changePassword(){
+  _changePassword() {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
           color: theme.colorDefaultText,
-          text: strings.get(145),                           // Change password
+          text: strings.get(145), // Change password
           textStyle: theme.text14boldWhite,
-          pressButton: _onChangePassword
-      ),
+          pressButton: _onChangePassword),
     );
   }
 
-  _logout(){
+  _logout() {
     return Container(
       alignment: Alignment.center,
       child: IButton3(
           color: theme.colorDefaultText,
-          text: strings.get(132),                           // Sign Out
+          text: strings.get(132), // Sign Out
           textStyle: theme.text14boldWhite,
-          pressButton: _pressLogOutButton
-      ),
+          pressButton: _pressLogOutButton),
     );
   }
 
-
-  _userInfo(){
+  _userInfo() {
     return Container(
         margin: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-
-            IList4(text: "${strings.get(57)}:", // "Username",
+            IList4(
+              text: "${strings.get(57)}:", // "Username",
               textStyle: theme.text14bold,
               text2: account.userName,
               textStyle2: theme.text14bold,
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             if (account.typeReg == "email")
-              IList4(text: "${strings.get(58)}:", // "E-mail",
+              IList4(
+                text: "${strings.get(58)}:", // "E-mail",
                 textStyle: theme.text14bold,
                 text2: account.email,
                 textStyle2: theme.text14bold,
               ),
             if (account.typeReg == "google")
-              Row(children: [
-                Expanded(child: Text(strings.get(273), style: theme.text14bold,)), // "Log In with Google",
-                Container(
+              Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    strings.get(273),
+                    style: theme.text14bold,
+                  )), // "Log In with Google",
+                  Container(
                     margin: EdgeInsets.only(top: 10),
                     width: 100,
                     child: IButton5(
-                        color: Color(0xffd9534f), text: "", textStyle: theme.text14boldWhite,
-                        icon: "assets/google.png",),
-                )
-              ],),
+                      color: Color(0xffd9534f),
+                      text: "",
+                      textStyle: theme.text14boldWhite,
+                      icon: "assets/google.png",
+                    ),
+                  )
+                ],
+              ),
             if (account.typeReg == "facebook")
-              Row(children: [
-                Expanded(child: Text(strings.get(274), style: theme.text14bold,)), // "Log In with Facebook",
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: 100,
-                  child: IButton5(
-                    color: Color(0xff428bca), text: "", textStyle: theme.text14boldWhite,
-                    icon: "assets/facebook.png",),
-                )
-              ],),
-            SizedBox(height: 10,),
-            IList4(text: "${strings.get(106)}:", // "Phone",
+              Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    strings.get(274),
+                    style: theme.text14bold,
+                  )), // "Log In with Facebook",
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    width: 100,
+                    child: IButton5(
+                      color: Color(0xff428bca),
+                      text: "",
+                      textStyle: theme.text14boldWhite,
+                      icon: "assets/facebook.png",
+                    ),
+                  )
+                ],
+              ),
+            SizedBox(
+              height: 10,
+            ),
+            IList4(
+              text: "${strings.get(106)}:", // "Phone",
               textStyle: theme.text14bold,
               text2: account.phone,
               textStyle2: theme.text14bold,
             ),
-            SizedBox(height: 10,),
-
+            SizedBox(
+              height: 10,
+            ),
           ],
-        )
-
-    );
+        ));
   }
-
 }
-

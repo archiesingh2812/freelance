@@ -20,25 +20,36 @@ class ListWithIcon extends StatelessWidget {
 
     if (theme.appSkin == "smarter") {
       if (icon != null)
-          _imageAsset = Icon(icon, color: (imageColor != null) ? imageColor : null,);
-    }else
-      if (imageAsset != null) {
-        _imageAsset = Image.asset(imageAsset,
-          fit: BoxFit.contain, color:
-          (imageColor != null) ? imageColor : null,);
-        _imageAsset = UnconstrainedBox(
-            child: Container(
-                height: 25,
-                width: 25,
-                child: _imageAsset
-            ));
-      }
+        _imageAsset = Icon(
+          icon,
+          color: (imageColor != null) ? imageColor : null,
+        );
+    } else if (imageAsset != null) {
+      _imageAsset = Image.asset(
+        imageAsset,
+        fit: text == strings.get(268) ? BoxFit.fitHeight : BoxFit.contain,
+        color: (imageColor != null) ? imageColor : null,
+      );
+      _imageAsset = UnconstrainedBox(
+          child: text == strings.get(268)
+              ? Container(height: 35, width: 35, child: _imageAsset)
+              : Container(height: 25, width: 25, child: _imageAsset));
+    }
 
-    return Row(children: <Widget>[
-      _imageAsset,
-      SizedBox(width: 10,),
-      Expanded(child: Text(text, style: theme.text16bold, overflow: TextOverflow.ellipsis, maxLines: 3,)),
-    ],
+    return Row(
+      children: <Widget>[
+        _imageAsset,
+        SizedBox(
+          width: 10,
+        ),
+        Expanded(
+            child: Text(
+          text,
+          style: theme.text16bold,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 3,
+        )),
+      ],
     );
   }
 }

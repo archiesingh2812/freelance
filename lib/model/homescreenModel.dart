@@ -12,7 +12,7 @@ import 'package:fooddelivery/ui/main/mainscreen.dart';
 
 AppSettings appSettings = AppSettings();
 
-class HomeScreenModel{
+class HomeScreenModel {
   MainWindowDataAPI _mainWindowDataServerApi = MainWindowDataAPI();
   MainWindowData mainWindowData;
   SecondStepData secondStepData;
@@ -21,18 +21,16 @@ class HomeScreenModel{
   Function() _callback;
   var location = MyLocation();
 
-  _error(String error){
+  _error(String error) {
     dprint(error);
     _callbackError(error);
   }
 
   bool _init = false;
   _dataLoad(MainWindowData _data) async {
-    if (!_data.success)
-      return _error("_data = null");
+    if (!_data.success) return _error("_data = null");
 
-    if (_init)
-      return _callback();
+    if (_init) return _callback();
 
     //
     appSettings = _data.settings;
@@ -42,12 +40,10 @@ class HomeScreenModel{
     basket.defCurrency = _data.currency;
     basket.taxes = _data.defaultTax;
     // top restaurants
-    if (_data.toprestaurants != null)
-      topRestaurants = _data.toprestaurants;
+    if (_data.toprestaurants != null) topRestaurants = _data.toprestaurants;
 
     // restaurants near your
-    if (_data.restaurants != null)
-          nearYourRestaurants = _data.restaurants;
+    if (_data.restaurants != null) nearYourRestaurants = _data.restaurants;
 
     categories = _data.categories;
 
@@ -59,13 +55,17 @@ class HomeScreenModel{
 
     // reviews
     if (_data.restaurantsreviews != null) {
-      for (var review in _data.restaurantsreviews){
+      for (var review in _data.restaurantsreviews) {
         if (review.name != "null")
-          reviews.add(Reviews(image: "${review.image}", name: review.name,
-            text: review.desc,
-              date: review.updatedAt,
-              id : review.id, star: review.rate),
-            );
+          reviews.add(
+            Reviews(
+                image: "${review.image}",
+                name: review.name,
+                text: review.desc,
+                date: review.updatedAt,
+                id: review.id,
+                star: review.rate),
+          );
       }
     }
 
@@ -76,16 +76,15 @@ class HomeScreenModel{
     pref.set(Pref.bottomBarType, appSettings.bottomBarType);
   }
 
-  load(Function() callback, Function(String) callbackError){
+  load(Function() callback, Function(String) callbackError) {
     _callbackError = callbackError;
     _callback = callback;
-    if (mainWindowData != null)
-      return _dataLoad(mainWindowData);
     _mainWindowDataServerApi.get(_dataLoad, _error);
+    if (mainWindowData != null) return _dataLoad(mainWindowData);
     loadSecondStep(_secondDataLoad, _error);
   }
 
-  _secondDataLoad(SecondStepData _secondStepData){
+  _secondDataLoad(SecondStepData _secondStepData) {
     if (_secondStepData.error == "0") {
       secondStepData = _secondStepData;
       addFoods(secondStepData.foods);
@@ -98,5 +97,4 @@ class HomeScreenModel{
       item.distance = await location.distance(item.lat, item.lng);
     nearYourRestaurants.sort((a, b) => a.compareTo(b));
   }
-
 }

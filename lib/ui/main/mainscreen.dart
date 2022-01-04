@@ -238,6 +238,7 @@ class _MainScreenState extends State<MainScreen>
     var _ordersIcon = "assets/orders3.png";
     if (theme.appTypePre == "restaurants") _ordersIcon = "assets/orders.png";
     print(appSettings.bottomBarType);
+    print('here printing : ${pref.get(Pref.bottomBarType)}');
     print(theme.appSkin);
     return WillPopScope(
         onWillPop: () async {

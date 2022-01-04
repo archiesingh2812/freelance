@@ -17,9 +17,9 @@ String serverImages = "${_path}public/images/";
 String serverImgNoUserPath = "${_path}public/img/user.png";
 */
 String serverPath = "${_path}public/api/";
-String loginserverPath = "${_path2}public/api/";
+String loginserverPath = "${_path}public/api/";
 
 String serverImages = "${_path}public/images/";
-String serverImages2 = "${_path2}public/images/";
+String serverImages2 = "${_path}public/images/";
 
 String serverImgNoUserPath = "${_path}public/img/user.png";
